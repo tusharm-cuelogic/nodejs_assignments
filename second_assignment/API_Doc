@@ -1,0 +1,14 @@
+  API
+
+  Signup: http://localhost:3000/signup?email=matetushar@gmail.com&password=matetushar&firstname=Tushar&lastname=Mate
+
+  Signin: http://localhost:3000/signin?email=admin@gmail.com&password=1234
+
+  Add Blog:
+  http://localhost:3000/blog/addblog?title=my first blog&body=my first blog description&published=yes
+
+  Show Blog:
+  http://localhost:3000/blog/show/1
+
+  Add Comment:
+  http://localhost:3000/blog/addcomment?body=this is blog comment&id=2

@@ -1,6 +1,4 @@
-var BlogSchema = require('../schemas/blog.js'),
-	UserSchema = require('../schemas/user.js'),
-	ObjectId = require('mongoose').Types.ObjectId;
+
 
 module.exports = {
 	add : fnAddBlog,
@@ -10,58 +8,49 @@ module.exports = {
 
 function fnAddBlog (req,res,next) {
 	var id;
-	UserSchema.findOne({email:req.session.email}, function(err,user) {
-		if (user) {
-			var blog = {
-				title: req.body.title,
-				body: req.body.body,
-				published: req.body.published,
-				author: user._id
+	var blog = {
+				title: req.query.title,
+				body: req.query.body,
+				published: req.query.published
+				//author: user._id
 			};
 
-			var Addblog = new BlogSchema(blog);
-		  		Addblog.save(function(err,res) {
-					if (err) {
-						return next(err);
-					}
-					req.tempStore.data = {
-						'status' : 1,
-						'message' : 'Blog added successfully'
-					};
-					next();
-				});
-	    }
-	});
+	res.send("Blog added successfully");
+	req.tempStore.data = {
+		'status' : 1,
+		'message' :blog
+	};
+	next();
 }
 
 function fnShowBlog (req, res, next) {
-	BlogSchema.findOne({_id: new ObjectId(req.params.id)}).populate('author','firstname lastname').exec(function(err, blog) {
-		if (err) {
-			return next(err);
-		}
-		req.tempStore.data = {
-			'status' : 1,
-			'message' :blog
-		};
-		next();
-	});
+	var blog = {
+				title: 'Test Blog 1',
+				body: 'Blog Body/Description',
+				published: 'yes',
+				author: '2'
+			};
+	
+	req.tempStore.data = {
+		'status' : 1,
+		'message' :blog
+	};
+	next();
 }
-
 
 function fnAddComment (req,res,next) {
-	BlogSchema.findOne({_id: new ObjectId(req.body.id)})
-	.exec(function(err, blog) {
-		if (err) {
-			return next(err);
-		}
-		blog.comments.push({body: req.body.body});
-	  	blog.save(function(err, result) {
 
-	  		req.tempStore.data = {
-					'status' : 1,
-					'message' : 'comment added successfully'
-				};
-				next();
-	  	});
-	});
-}
+	//blog.comments.push({body: req.query.body});
+	var blog = {
+				comments: req.query.body
+			};
+
+	res.send("Comment added successfully");
+	req.tempStore.data = {
+		'status' : 1,
+		'message' : 'comment added successfully',
+		'comment' :blog
+	};
+	next();
+}	  	
+	
