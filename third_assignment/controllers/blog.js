@@ -33,13 +33,6 @@ function fnShowBlog (req, res, next) {
 	
 	var intBlogId = req.params.id;
 
-	var blog = {
-				title: 'Test Blog 1',
-				body: 'Blog Body/Description',
-				published: 'yes',
-				author: '2'
-			};
-
 	dbconnection.query("SELECT * FROM blog WHERE id ='"+intBlogId+"'", function(error, arrResult, fields) {
 		if (error) {
 				return next(error);

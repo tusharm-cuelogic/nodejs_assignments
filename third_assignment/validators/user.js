@@ -27,7 +27,7 @@ function fnValidateSignin (req,res,next) {
 		
 		req.tempStore.data = {
 			'status' : 0,
-			'message' : 'Please enter valid Email'
+			'message' : 'Please enter valid password'
 		};
 		next();
 	}

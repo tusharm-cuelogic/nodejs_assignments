@@ -1,6 +1,8 @@
   Assignment #3
-  
+  - Db connection and convert stubs to do real interaction with database.
+
   API's
+  − maintain user session or access token
   − Extend API's: signup/signin, get blog, add blogs, add comments
   − Use postman / SOAP UI to test api's working
 
