@@ -8,14 +8,17 @@ function fnSignin (req, res, next) {
 	var strEmail = req.query.email,
 		password = req.query.password;
 
+		console.log(strEmail);
+		console.log(password);
+
 	dbconnection.query("SELECT id FROM user WHERE email ='"+strEmail+"' AND password = '"+password+"'", function(error, arrDeviceResult, fields) {
 		if (error) {
 				return next(error);
 		}
 		
-		if (arrDeviceResult[0] !="" && arrDeviceResult[0] != "undefined" && arrDeviceResult[0] != null) {
-			var strDeviceResult = arrDeviceResult[0];
-			UserId = strDeviceResult.id;
+		if (!arrDeviceResult) {
+			var strDeviceResult = arrDeviceResult[0],
+				UserId = strDeviceResult.id;
 
 			if (UserId !="" && UserId != "undefined" && UserId != null) {
 				
