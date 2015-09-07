@@ -55,7 +55,11 @@ function AddEditproperty (req,res,next) {
 	
 function PropertyListing (req,res,next) {
 	
-	dbconnection.query("SELECT title, address, squarfeet,price,property_id FROM property", function(error, Result, fields) {
+	var queryLimit = 1; 
+	    pageNumber = (isNaN(req.query.page) == true || req.query.page == "") ? 1 : req.query.page,
+	    startOffset = parseInt((pageNumber - 1) * queryLimit);
+	
+	dbconnection.query("SELECT title, address, squarfeet,price,property_id FROM property LIMIT "+startOffset+","+queryLimit, function(error, Result, fields) {
 		if (error) {
 				return next(error);
 		}
